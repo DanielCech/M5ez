@@ -3476,9 +3476,15 @@ String ezMenu::pickButton() { return _pick_button; }
 
 void ezMenu::pickItem(int16_t index)
 {
-	if (0 <= index && index < _items.size()) {
-		_selected = index;
-	}
+    if (0 <= index && index < _items.size()) {
+        _selected = index;
+        ez.canvas.clear();
+        _drawImage(_items[_selected]);
+        _drawCaption();
+        if (_items[_selected].simpleFunction) {
+            (_items[_selected].simpleFunction)();
+        }
+    }
 }
 
 void ezMenu::_Arrows() {
